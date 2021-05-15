@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.forum.controllers.dto.TopicDTO;
+import br.com.alura.forum.controllers.dto.TopicDetailsDTO;
 import br.com.alura.forum.controllers.form.TopicForm;
 import br.com.alura.forum.models.Topic;
 import br.com.alura.forum.repository.CourseRepository;
@@ -34,6 +36,15 @@ public class TopicsController {
 	public List<TopicDTO> getTopics() {
 		List<Topic> topics = topicRepo.findAll();
 		return TopicDTO.convertList(topics);
+	}
+	
+	@GetMapping("/{id}")
+	public TopicDetailsDTO details(@PathVariable("id") Long id) {
+		
+		Topic topic = this.topicRepo.getOne(id);
+		
+		return new TopicDetailsDTO(topic);
+		
 	}
 	
 	@PostMapping
