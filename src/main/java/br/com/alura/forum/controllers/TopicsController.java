@@ -3,6 +3,8 @@ package br.com.alura.forum.controllers;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +37,7 @@ public class TopicsController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TopicDTO> create(@RequestBody TopicForm form, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<TopicDTO> create(@RequestBody @Valid TopicForm form, UriComponentsBuilder uriBuilder) {
 		Topic topic = this.topicRepo.save(form.toTopic(courseRepo));
 		
 		URI uri = uriBuilder

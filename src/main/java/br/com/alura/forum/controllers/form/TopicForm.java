@@ -1,13 +1,22 @@
 package br.com.alura.forum.controllers.form;
 
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
 import br.com.alura.forum.models.Course;
 import br.com.alura.forum.models.Topic;
 import br.com.alura.forum.repository.CourseRepository;
 
 public class TopicForm {
 	
+	@NotBlank @Length(min = 5)
 	private String title;
+	
+	@NotBlank @Length(min = 10)
 	private String message;
+	
+	@NotBlank
 	private String courseName;
 	
 	public Topic toTopic(CourseRepository courseRepo) {
