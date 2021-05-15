@@ -2,17 +2,27 @@ package br.com.alura.forum.models;
 
 import java.time.LocalDateTime;
 
-public class TopicAnswer {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class TopicAnswer {
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String message;
 	
+	@ManyToOne
 	private Topic topic;
 	
 	private LocalDateTime answerDate  = LocalDateTime.now();
 	
-	private User autor;
+	@ManyToOne
+	private User author;
 	
 	private Boolean solution = false;
 	
@@ -20,12 +30,12 @@ public class TopicAnswer {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public TopicAnswer(String message, Topic topic, LocalDateTime answerDate, User autor, Boolean solution) {
+	public TopicAnswer(String message, Topic topic, LocalDateTime answerDate, User author, Boolean solution) {
 		super();
 		this.message = message;
 		this.topic = topic;
 		this.answerDate = answerDate;
-		this.autor = autor;
+		this.author = author;
 		this.solution = solution;
 	}
 
@@ -62,11 +72,11 @@ public class TopicAnswer {
 	}
 
 	public User getAutor() {
-		return autor;
+		return author;
 	}
 
-	public void setAutor(User autor) {
-		this.autor = autor;
+	public void setAutor(User author) {
+		this.author = author;
 	}
 
 	public Boolean getSolution() {

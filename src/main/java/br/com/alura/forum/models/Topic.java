@@ -4,8 +4,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Topic {
 
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String title;
@@ -14,12 +25,16 @@ public class Topic {
 	
 	private LocalDateTime openingDate = LocalDateTime.now();
 	
+	@Enumerated(EnumType.STRING)
 	private TopicStatus status = TopicStatus.NOT_ANSWERED;
 	
+	@ManyToOne
 	private User author;
 	
+	@ManyToOne
 	private Course course;
 	
+	@OneToMany(mappedBy = "topic")
 	private List<TopicAnswer> answers = new ArrayList<>();
 	
 	public Topic() {
