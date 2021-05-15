@@ -19,7 +19,11 @@ public class TopicDTO {
 		this.message = topic.getMessage();
 		this.openingDate = topic.getOpeningDate();
 	}
-
+	
+	public static List<TopicDTO> convertList(List<Topic> topics) {
+		return topics.stream().map(TopicDTO::new).collect(Collectors.toList());
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -36,8 +40,5 @@ public class TopicDTO {
 		return openingDate;
 	}
 	
-	public static List<TopicDTO> convertList(List<Topic> topics) {
-		return topics.stream().map(TopicDTO::new).collect(Collectors.toList());
-	}
 	
 }
