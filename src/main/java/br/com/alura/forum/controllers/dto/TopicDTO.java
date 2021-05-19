@@ -1,8 +1,8 @@
 package br.com.alura.forum.controllers.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
 
 import br.com.alura.forum.models.Topic;
 
@@ -20,8 +20,8 @@ public class TopicDTO {
 		this.openingDate = topic.getOpeningDate();
 	}
 	
-	public static List<TopicDTO> convertList(List<Topic> topics) {
-		return topics.stream().map(TopicDTO::new).collect(Collectors.toList());
+	public static Page<TopicDTO> convertList(Page<Topic> topics) {
+		return topics.map(TopicDTO::new);
 	}
 	
 	public Long getId() {
