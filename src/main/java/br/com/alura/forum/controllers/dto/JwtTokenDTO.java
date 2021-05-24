@@ -7,6 +7,23 @@ public class JwtTokenDTO {
 	
 	private String type;
 	
+	public JwtTokenDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public JwtTokenDTO(String type, String token) {
+		this.type = type;
+		this.token = token;
+	}
+	
+	public String getToken() {
+		return token;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
 	public void setToken(String token) {
 		this.token = token;
 	}
