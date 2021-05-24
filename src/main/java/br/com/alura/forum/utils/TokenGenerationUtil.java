@@ -4,18 +4,20 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 import br.com.alura.forum.controllers.dto.JwtTokenDTO;
 import br.com.alura.forum.models.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Service
 public class TokenGenerationUtil {
 	
 	@Value("${forum.alura.jwt.secret}")
-	private static String secret;
+	private String secret;
 	
-	public static JwtTokenDTO generate(Authentication auth) {
+	public JwtTokenDTO generate(Authentication auth) {
 		
 		User userDetails = (User) auth.getPrincipal();
 		
@@ -27,7 +29,7 @@ public class TokenGenerationUtil {
 							.setSubject(userDetails.getId().toString())
 							.setIssuedAt(now)
 							.setExpiration( new Date(now.getTime() + oneDay) )
-							.signWith(SignatureAlgorithm.HS256, "pass")
+							.signWith(SignatureAlgorithm.HS256, secret)
 							.compact();
 		
 		return new JwtTokenDTO(type, token);

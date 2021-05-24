@@ -23,6 +23,9 @@ public class AuthController {
 	
 	@Autowired
 	private AuthenticationManager authManager; // Bean provided in SecurityConfig.java
+	
+	@Autowired
+	private TokenGenerationUtil tokenUtil;
 
 	@PostMapping
 	public ResponseEntity<JwtTokenDTO> authenticate(@RequestBody @Valid LoginForm loginForm) {
@@ -32,7 +35,7 @@ public class AuthController {
 		try {
 			
 			Authentication auth = authManager.authenticate(userCredentials);
-			JwtTokenDTO token = TokenGenerationUtil.generate(auth);
+			JwtTokenDTO token = tokenUtil.generate(auth);
 			
 			return ResponseEntity.ok(token);
 
