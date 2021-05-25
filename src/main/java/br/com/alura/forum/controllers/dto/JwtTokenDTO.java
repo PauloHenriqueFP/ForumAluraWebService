@@ -3,10 +3,10 @@ package br.com.alura.forum.controllers.dto;
 @SuppressWarnings("unused")
 public class JwtTokenDTO {
 	
-	private String token;
-	
 	private String type;
-	
+
+	private String token;
+		
 	public JwtTokenDTO() {
 		// TODO Auto-generated constructor stub
 	}

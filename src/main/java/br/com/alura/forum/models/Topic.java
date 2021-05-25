@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,7 +35,7 @@ public class Topic {
 	@ManyToOne
 	private Course course;
 	
-	@OneToMany(mappedBy = "topic")
+	@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
 	private List<TopicAnswer> answers = new ArrayList<>();
 	
 	public Topic() {

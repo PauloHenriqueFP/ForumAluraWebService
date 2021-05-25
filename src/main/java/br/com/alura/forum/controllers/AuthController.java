@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.forum.controllers.dto.JwtTokenDTO;
 import br.com.alura.forum.controllers.form.LoginForm;
-import br.com.alura.forum.utils.TokenGenerationUtil;
+import br.com.alura.forum.utils.JwtTokenUtilsService;
 
 @RestController
 @RequestMapping("/auth")
@@ -25,7 +25,7 @@ public class AuthController {
 	private AuthenticationManager authManager; // Bean provided in SecurityConfig.java
 	
 	@Autowired
-	private TokenGenerationUtil tokenUtil;
+	private JwtTokenUtilsService tokenUtil;
 
 	@PostMapping
 	public ResponseEntity<JwtTokenDTO> authenticate(@RequestBody @Valid LoginForm loginForm) {
